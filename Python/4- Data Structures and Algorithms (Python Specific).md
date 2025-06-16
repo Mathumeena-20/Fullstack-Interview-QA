@@ -1,6 +1,3 @@
-Here are the **solutions with examples and detailed explanations** for each of your Python interview questions:
-
----
 
 # ✅ 1. How Do You Implement a Stack/Queue in Python?
 
