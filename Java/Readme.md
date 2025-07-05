@@ -1,5 +1,3 @@
----
-
 ### ✅ 1. **Core Java – OOPs Concepts**
 
 * What are the 4 pillars of OOP in Java? Explain with examples.
