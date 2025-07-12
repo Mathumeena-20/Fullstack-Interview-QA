@@ -1,1 +1,10 @@
+✅ 1. Reverse a string without using built-in methods
+
+def reverseString(s):
+    reverse_Str = ['h','e','l','l','o']
+    for char in s:
+        reverse_Str.append(char)
+    return''.join(reverse_Str[::-1])
+print(reverseString(""))
+
 
