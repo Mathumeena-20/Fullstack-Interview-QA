@@ -74,9 +74,7 @@ print(person.get_name())  # Access through method
 ### 🔹 Instance Method
 
 **Explanation:**
-Works with object-specific data.
-First parameter is always `self`.
-
+Instance method is a function defined within a class that operate specific instance of a class
 **Example:**
 
 ```python
