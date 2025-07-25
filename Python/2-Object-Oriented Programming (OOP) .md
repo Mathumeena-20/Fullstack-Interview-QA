@@ -89,8 +89,7 @@ class Sample:
 ### 🔹 Class Method
 
 **Explanation:**
-Works with class-level data.
-First parameter is always `cls`.
+Class method is the method that is bound to the class itself,rather than the instance of the class
 
 **Example:**
 
