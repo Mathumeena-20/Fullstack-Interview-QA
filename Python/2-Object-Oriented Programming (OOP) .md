@@ -5,6 +5,7 @@
 **Explanation:**
 Inheritance allows one class to acquire the properties and methods of another class.
 
+
 **Example:**
 
 ```python
