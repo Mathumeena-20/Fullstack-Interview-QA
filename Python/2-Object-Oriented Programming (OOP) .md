@@ -121,12 +121,13 @@ class Sample:
 
 ---
 
-## 3. **What is Method Overriding?**
+## 3. **What is Method overloading Method Overriding?**
+Method Overloading:
 
-### Explanation:
+Overloading occurs when twor or more method in the same class have the same name but different parameter
 
-When a subclass defines a method with the same name as a method in the parent class, the subclass method overrides the parent method.
-
+Method Overriding:
+Overring occurs when the child class provides the own implementation of the method that is already defined in the parentclass
 **Example:**
 
 ```python
