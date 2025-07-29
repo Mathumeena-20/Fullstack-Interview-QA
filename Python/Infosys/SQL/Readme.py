@@ -1,0 +1,94 @@
+Infosys database interview questions generally focus on **SQL fundamentals, normalization, indexing, joins, performance tuning, and transactions**. For Python roles, they might also check **DB connectivity** concepts. Below is a categorized list:
+
+---
+
+## ✅ **1. SQL Basics**
+
+* What are the different types of SQL commands?
+* Difference between **DDL**, **DML**, **DCL**, and **TCL**.
+* Explain **primary key**, **foreign key**, and **unique key**.
+* What is the difference between **DELETE**, **TRUNCATE**, and **DROP**?
+* What are **indexes**? How do they improve performance?
+* Explain **Clustered** vs **Non-Clustered Index**.
+
+---
+
+## ✅ **2. Joins & Subqueries**
+
+* Explain different types of **JOINS**: INNER, LEFT, RIGHT, FULL.
+* Write a query to find employees who have not been assigned to any project.
+* Difference between **JOIN** and **Subquery**.
+* Write a query to get the **second highest salary**.
+* What is **self join**? Give an example.
+
+---
+
+## ✅ **3. Normalization & Constraints**
+
+* What is **normalization**? Explain 1NF, 2NF, 3NF.
+* What is **denormalization**? When is it used?
+* Explain **constraints** in SQL.
+* Difference between **NOT NULL** and **CHECK** constraint.
+
+---
+
+## ✅ **4. Transactions & ACID**
+
+* What are **ACID properties** in a database?
+* Explain **transaction states**.
+* What is **COMMIT**, **ROLLBACK**, and **SAVEPOINT**?
+* Difference between **Implicit** and **Explicit** transactions.
+
+---
+
+## ✅ **5. Performance Optimization**
+
+* What is the purpose of **indexing**?
+* What is **query optimization**? Name techniques.
+* Explain **execution plan** in SQL.
+* Difference between **HAVING** and **WHERE** clauses.
+
+---
+
+## ✅ **6. Stored Procedures & Views**
+
+* What are **stored procedures**? Advantages over queries?
+* Difference between **function** and **procedure**.
+* What are **triggers** in SQL? Give an example.
+* What are **views**? Can we update a view?
+
+---
+
+## ✅ **7. Advanced Topics**
+
+* Explain **window functions** (ROW\_NUMBER, RANK, DENSE\_RANK).
+* What is **CTE (Common Table Expression)**?
+* Explain **indexes on multiple columns**.
+* How does **foreign key cascade** work?
+
+---
+
+## ✅ **8. Infosys SQL Coding Questions**
+
+* Write a query to find **duplicate rows** in a table.
+* Write a query to **swap genders** (M ↔ F) in a column.
+* Get the **nth highest salary** without using TOP or LIMIT.
+* Find employees who joined in the **last 30 days**.
+* Write a query to display department-wise maximum salary.
+
+---
+
+## ✅ **9. Python + DB Integration**
+
+* How do you connect Python to a database?
+* What is **cursor** in DB API?
+* How do you use **parameterized queries** to prevent SQL Injection?
+
+---
+
+🔥 **Do you want me to prepare a PDF with:**
+✔ **50 Infosys SQL Questions + Answers + Queries**
+✔ **20 Coding Problems with Solutions**
+✔ **Python DB Integration Examples**
+
+✅ OR should I create a **1-Day Fast-Track Database Prep Plan** like I did for Python?
