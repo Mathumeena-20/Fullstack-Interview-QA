@@ -243,8 +243,3 @@ function Timer() {
   });
   return <h1>Timer</h1>;
 }
-
-
-## 11. **React.Js**
-ReactJS is a JavaScript library (not a framework) developed by Facebook (Meta) for building fast, dynamic, and interactive user interfaces (UI), especially for single-page applications (SPA).
-
