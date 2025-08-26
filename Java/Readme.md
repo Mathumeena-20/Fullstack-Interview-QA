@@ -1,102 +1,128 @@
-### ✅ 1. **Core Java – OOPs Concepts**
+## 🔹 Core Java (Basics + OOPs)
 
-* What are the 4 pillars of OOP in Java? Explain with examples.
-* Difference between **Abstraction** and **Encapsulation**?
-* What is **polymorphism**? Explain **compile-time** and **run-time** polymorphism.
-* What is the difference between **interface** and **abstract class**?
-* Can we create an object of an abstract class or interface?
-* Explain the **IS-A** and **HAS-A** relationship in Java.
-* What is method overloading and overriding?
-
----
-
-### ✅ 2. **Java Basics**
-
-* What are access modifiers in Java? (public, private, protected, default)
-* Difference between **==** and **.equals()** method?
-* Why is Java **platform independent**?
-* Why is Java not a **pure object-oriented** language?
-* What is the difference between **JDK, JRE, JVM**?
+* What are the four pillars of OOP? Explain with examples.
+* Difference between **class** and **object**?
+* Difference between **abstract class and interface**?
+* Can an interface have default and static methods (Java 8)?
+* Difference between **method overloading and method overriding**?
+* What is **polymorphism** in Java?
+* What is **encapsulation** and why is it important?
+* Difference between **this** and **super** keywords?
+* What is the difference between **== and .equals()** in Java?
+* What is a **constructor**? Types of constructors?
+* Can we make a class **immutable** in Java? How?
 
 ---
 
-### ✅ 3. **Exception Handling**
+## 🔹 Java Basics & Language Features
 
-* What is the difference between **checked** and **unchecked** exceptions?
-* What is the difference between **throw** and **throws**?
-* Can we write **finally** block without **catch**?
-* What happens if an exception is not caught?
+* Difference between **primitive** and **wrapper classes**?
+* What is **String pool** in Java?
+* Difference between **String, StringBuilder, StringBuffer**?
+* Why are Strings **immutable** in Java?
+* What is the **final, finally, and finalize** difference?
+* Explain **pass by value vs pass by reference** in Java.
+* Difference between **static** and **instance** variables/methods?
+* What is **autoboxing and unboxing**?
+* Difference between **==, equals(), and hashCode()**?
+* Explain **transient and volatile** keywords.
 
 ---
 
-### ✅ 4. **Collections Framework**
+## 🔹 Collections Framework
 
 * Difference between **List, Set, and Map**?
-* Difference between **ArrayList** and **LinkedList**?
-* How does **HashMap** work internally?
-* What is the difference between **HashMap** and **Hashtable**?
-* What is the difference between **HashSet** and **TreeSet**?
-* What are the **fail-fast** and **fail-safe** iterators?
+* Difference between **ArrayList and LinkedList**?
+* Difference between **HashSet, LinkedHashSet, and TreeSet**?
+* Difference between **HashMap, LinkedHashMap, and TreeMap**?
+* Difference between **HashMap and Hashtable**?
+* How does **HashMap work internally**? (hashing, load factor, rehashing)
+* What is **ConcurrentHashMap**? How is it different from HashMap?
+* Difference between **Iterator and ListIterator**?
+* What is **fail-fast vs fail-safe iterator**?
+* What is the difference between **Comparable and Comparator**?
 
 ---
 
-### ✅ 5. **Multithreading & Concurrency**
+## 🔹 Exception Handling
 
-* What is a **thread** in Java?
-* Difference between **process** and **thread**?
-* Lifecycle of a thread.
-* What is the difference between **synchronized method** and **synchronized block**?
-* What is a **deadlock** and how to prevent it?
-* Difference between **wait()**, **notify()**, and **notifyAll()**?
-
----
-
-### ✅ 6. **Java 8 Features**
-
-* What is a **lambda expression**? Give an example.
-* What are **functional interfaces**? Name a few built-in ones.
-* What is **Stream API**? List some stream operations.
-* Difference between **map()** and **flatMap()**?
-* What is **Optional** in Java 8?
-* What is the purpose of **default** and **static methods** in interfaces?
+* Difference between **checked and unchecked exceptions**?
+* Explain **throw vs throws** keywords.
+* Can we write **try without catch**?
+* What is the difference between **try-with-resources** and finally block?
+* What is **custom exception** in Java?
 
 ---
 
-### ✅ 7. **File I/O and Serialization**
+## 🔹 Multithreading & Concurrency
 
-* How to read/write files in Java using **FileReader**, **BufferedReader**?
-* What is **serialization** and **deserialization**?
-* What is the use of **transient** keyword?
-
----
-
-### ✅ 8. **String Handling**
-
-* Difference between **String**, **StringBuffer**, and **StringBuilder**?
-* Why are **Strings immutable** in Java?
-* What is the **string pool**?
-* How does **substring()**, **indexOf()**, **split()** work?
+* What is the difference between **process and thread**?
+* How to create a thread in Java (Runnable vs Thread)?
+* What is the difference between **start() and run()** methods?
+* What is the difference between **synchronized method and synchronized block**?
+* What is **deadlock, livelock, and starvation**?
+* Difference between **sleep(), yield(), and join()**?
+* What is **ThreadLocal** in Java?
+* Difference between **Callable and Runnable**?
+* What are **ExecutorService and ThreadPool**?
+* Difference between **wait(), notify(), and notifyAll()**?
 
 ---
 
-### ✅ 9. **Memory Management**
+## 🔹 Java 8 Features
 
-* Difference between **Stack** and **Heap** memory?
+* What are **functional interfaces**?
+* Explain **Lambda expressions** with examples.
+* What are **Streams** in Java 8?
+* Difference between **map() and flatMap()** in streams.
+* What are **default and static methods** in interfaces?
+* What is the difference between **Optional** and null checks?
+* What are **method references** in Java 8?
+
+---
+
+## 🔹 Advanced (JVM & Performance)
+
+* Explain **JVM, JDK, JRE** differences.
+* What is **ClassLoader** in Java?
+* What are **Heap and Stack memory**?
 * What is **Garbage Collection** in Java?
-* What are strong, weak, soft, and phantom references?
+* What are **strong, weak, soft, and phantom references**?
+* Difference between **serial and parallel garbage collector**?
 
 ---
 
-### ✅ 10. **Java Programs to Practice**
+## 🔹 Spring Boot (Basic, since 2+ years role expects it)
 
-* Reverse a string without using library functions.
-* Find duplicates in an array or string.
-* Check for palindrome.
-* Fibonacci series (iterative and recursive).
-* Count occurrence of each character in a string.
-* Find first non-repeating character.
-* Sort map by values.
-* Multithreaded producer-consumer implementation.
+* Difference between **Spring and Spring Boot**?
+* What is **Dependency Injection (DI)**?
+* What is the use of **@Autowired, @Component, @Service, @Repository** annotations?
+* What is **Spring Bean lifecycle**?
+* Difference between **singleton and prototype beans**?
+* How do you handle **exception handling** in Spring Boot (e.g. @ControllerAdvice)?
+* What is **REST Controller vs Controller**?
+* How do you connect Spring Boot with **database** (JPA/Hibernate)?
 
 ---
 
+## 🔹 Hibernate/JPA
+
+* What is **Hibernate**? Difference between **Hibernate and JPA**?
+* Difference between **save() and persist()**?
+* What is **Lazy vs Eager fetching**?
+* What is the use of **@Entity, @Id, @GeneratedValue** annotations?
+* What is the difference between **get() and load()**?
+* Explain **First-level and Second-level cache** in Hibernate.
+* Difference between **native query and JPQL**?
+
+---
+
+## 🔹 REST APIs
+
+* What is REST? Difference between **REST and SOAP**?
+* What are **HTTP methods** (GET, POST, PUT, DELETE, PATCH)?
+* What are **status codes** (200, 201, 400, 401, 404, 500)?
+* What is the difference between **PUT and PATCH**?
+* How do you secure a REST API (JWT, OAuth2)?
+
+---
