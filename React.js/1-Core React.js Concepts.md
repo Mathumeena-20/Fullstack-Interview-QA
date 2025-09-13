@@ -62,7 +62,7 @@ function Counter({ initial }) { // props
 
 ---
 
-## 3. **what is How Virtual DOM Works**
+## 3. **How Virtual DOM Works**
 
 DOM- Document Object Model is a tree Sructure representing your HTML element in the browser
 
