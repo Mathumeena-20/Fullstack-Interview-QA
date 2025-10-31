@@ -174,7 +174,42 @@ dog.speak()
 
 ---
 
-## 5. **How are Private, Protected, and Public Members Handled in Python?**
+## 5. ** What is class and Object in python and give the example.**
+**Class — Blueprint / Template**
+A class is a blueprint or template for creating objects.
+It defines the structure (attributes) and behavior (methods) of objects.
+But a class itself is not a real-world entity — it’s just the design.
+
+**Object — Real-world entity**
+
+An object is an instance of a class.
+It’s the real-world entity that occupies memory and performs actions.
+
+# Define a class
+class Car:
+    # Constructor - called when object is created
+    def __init__(self, brand, color):
+        self.brand = brand
+        self.color = color
+    
+    # Method (behavior)
+    def start_engine(self):
+        print(f"{self.color} {self.brand}'s engine started!")
+
+# Create objects (instances)
+car1 = Car("Tesla", "Red")
+car2 = Car("BMW", "Blue")
+
+# Access attributes
+print(car1.brand)   # Tesla
+print(car2.color)   # Blue
+
+# Call methods
+car1.start_engine()  # Red Tesla's engine started!
+car2.start_engine()  # Blue BMW's engine started!
+
+
+## 6. **How are Private, Protected, and Public Members Handled in Python?**
 
 | Access Level | Syntax        | Access Scope                                              |
 | ------------ | ------------- | --------------------------------------------------------- |
