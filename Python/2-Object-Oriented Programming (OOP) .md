@@ -209,6 +209,7 @@ car1.start_engine()  # Red Tesla's engine started!
 car2.start_engine()  # Blue BMW's engine started!
 
 
+
 ## 6. **How are Private, Protected, and Public Members Handled in Python?**
 
 | Access Level | Syntax        | Access Scope                                              |
