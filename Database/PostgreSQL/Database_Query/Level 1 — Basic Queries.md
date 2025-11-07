@@ -5,9 +5,13 @@
 
 
 SELECT e.*
+
 FROM employees e
+
 JOIN departments d
+
 ON e.dept_id = d.dept_id
+
 WHERE d.dept_name = 'Engineering';
 
 
@@ -26,7 +30,9 @@ WHERE d.dept_name = 'Engineering';
 ✅ Query:
 
 SELECT *
+
 FROM employees
+
 WHERE hire_date > '2020-01-01';
 
 
@@ -45,8 +51,11 @@ WHERE hire_date > '2020-01-01';
 
 
 SELECT 
+    
     first_name || ' ' || last_name AS full_name,
+    
     salary
+
 FROM employees;
 
 
@@ -67,6 +76,7 @@ FROM employees;
 **✅ Query:**
 
 SELECT DISTINCT location
+
 FROM departments;
 
 **OUTPUT**
@@ -81,6 +91,7 @@ Boston
 **✅ Query:**
 
 SELECT COUNT(*) AS total_employees
+
 FROM employees;
 
 **OUTPUT**
