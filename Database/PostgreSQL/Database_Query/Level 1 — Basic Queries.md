@@ -82,7 +82,9 @@ FROM departments;
 **OUTPUT**
 
 New York
+
 San Francisco
+
 Boston
 
 
