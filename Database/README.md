@@ -1,2 +1,0 @@
-PostgrSQL
-MongoDB 
