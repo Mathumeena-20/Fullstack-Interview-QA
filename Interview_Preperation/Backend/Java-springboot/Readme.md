@@ -103,7 +103,7 @@
 9. What happens when static variables are used across multiple classes?
 ---
 
-**Section 2 — OOP (Object-Oriented Programming)
+**Section 2 — OOP (Object-Oriented Programming)**
 
 Here are **topic-wise OOP interview questions** tailored for a **2+ years experienced developer**. These focus on both concepts and practical usage you might face in real projects.
 
