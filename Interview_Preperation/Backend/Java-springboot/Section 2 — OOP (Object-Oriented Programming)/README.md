@@ -105,11 +105,16 @@ Here are **topic-wise Java 8 Core Features interview questions** designed for a 
 
 ## 🔥 Bonus Scenario-Based Questions
 
-1. How did Java 8 features improve your project code quality?
-2. Rewrite a traditional loop using Streams and lambdas.
-3. How to handle nulls using Optional in your project?
-4. When would you choose imperative vs functional style?
-5. Write a program to group employees by department using streams.
+1.Reverse a number without using built-in method.
+2.Check if a string is palindrome.
+3.Count frequency of characters in a string.
+4.Find largest and smallest number in an array.
+5.Swap two numbers without using third variable.
+6.Check if a number is prime (optimize for large numbers).
+7.Write a custom MathUtils class with overloaded methods add(int,int) and add(double,double).
+8.Explain JVM memory areas (with examples).
+9.What happens when static variables are used across multiple classes?
+
 
 ---
 
