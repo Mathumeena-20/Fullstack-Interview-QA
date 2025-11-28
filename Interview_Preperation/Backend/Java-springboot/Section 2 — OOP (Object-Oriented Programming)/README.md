@@ -104,15 +104,15 @@ Here are **topic-wise Java 8 Core Features interview questions** designed for a 
 ---
 
 ## 🔥 Bonus Scenario-Based Questions
-Create an interface Vehicle with methods start() and stop(). Implement it with Car and Bike.
-What is the difference between abstract class vs interface? Give code examples.
-Write a program showing runtime polymorphism using method overriding.
-Model a Library system using OOP concepts.
-Why is composition preferred over inheritance? Explain with a class example.s?
-You are designing a payment system. How would you apply OOP principles?
-Show how you implemented polymorphism in your current/previous project.
-When would you prefer composition over inheritance?
-How do SOLID principles relate to OOP?
-How does Java handle multiple inheritance via interfaces?
----
+1. Create an interface `Vehicle` with methods `start()` and `stop()`. Implement it with `Car` and `Bike`.
+2. What is the difference between an abstract class and an interface? Give code examples.
+3. Write a program showing runtime polymorphism using method overriding.
+4. Model a Library system using OOP concepts.
+5. Why is composition preferred over inheritance? Explain with a class example.
+6. You are designing a payment system. How would you apply OOP principles?
+7. Show how you implemented polymorphism in your current/previous project.
+8. When would you prefer composition over inheritance?
+9. How do SOLID principles relate to OOP?
+10. How does Java handle multiple inheritance via interfaces?
 
+---
