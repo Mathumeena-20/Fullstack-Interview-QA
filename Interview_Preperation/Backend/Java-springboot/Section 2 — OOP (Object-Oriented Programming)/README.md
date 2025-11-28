@@ -104,16 +104,15 @@ Here are **topic-wise Java 8 Core Features interview questions** designed for a 
 ---
 
 ## 🔥 Bonus Scenario-Based Questions
-1.Reverse a number without using built-in method.
-2.Check if a string is palindrome.
-3.Count frequency of characters in a string.
-4.Find largest and smallest number in an array.
-5.Swap two numbers without using third variable.
-6.Check if a number is prime (optimize for large numbers).
-7.Write a custom MathUtils class with overloaded methods add(int,int) and add(double,double).
-8.Explain JVM memory areas (with examples).
-9.What happens when static variables are used across multiple classes?
-
+Create an interface Vehicle with methods start() and stop(). Implement it with Car and Bike.
+What is the difference between abstract class vs interface? Give code examples.
+Write a program showing runtime polymorphism using method overriding.
+Model a Library system using OOP concepts.
+Why is composition preferred over inheritance? Explain with a class example.s?
+You are designing a payment system. How would you apply OOP principles?
+Show how you implemented polymorphism in your current/previous project.
+When would you prefer composition over inheritance?
+How do SOLID principles relate to OOP?
+How does Java handle multiple inheritance via interfaces?
 ---
 
-Would you like me to give **answers too** or provide **coding questions & practice problems** for these topics?
