@@ -1,0 +1,498 @@
+# 1. Difference Between ArrayList and LinkedList
+
+| Feature                 | ArrayList               | LinkedList                     |
+| ----------------------- | ----------------------- | ------------------------------ |
+| Data structure          | Dynamic array           | Doubly Linked List             |
+| Access time (get)       | **O(1)** fast           | **O(n)** slow                  |
+| Insert/delete at end    | **O(1)** amortized      | **O(1)**                       |
+| Insert/delete in middle | **O(n)** (shift needed) | **O(1)** (once node found)     |
+| Memory usage            | Less                    | More (stores extra pointers)   |
+| Best use case           | Access-heavy operations | Insert/delete-heavy operations |
+
+### Example:
+
+```java
+List<Integer> list1 = new ArrayList<>();
+List<Integer> list2 = new LinkedList<>();
+```
+
+### When to use?
+
+* **ArrayList** → frequent reads
+* **LinkedList** → frequent insert/remove in middle
+
+---
+
+# 2. When Would You Prefer Vector Over ArrayList?
+
+`Vector` is **synchronized** → **thread-safe**
+`ArrayList` is NOT thread-safe.
+
+You prefer Vector when:
+✔ Multiple threads modify the list
+✔ You need legacy thread-safe list
+✔ You cannot migrate to modern collections
+
+But in modern Java:
+❌ Avoid `Vector` → use `CopyOnWriteArrayList` or `Collections.synchronizedList()`
+
+### Example:
+
+```java
+Vector<Integer> v = new Vector<>();
+```
+
+---
+
+# 3. How Does CopyOnWriteArrayList Work?
+
+`CopyOnWriteArrayList` is a **thread-safe** version of ArrayList.
+
+### How it works?
+
+* Every write operation (add/remove) creates a **new copy** of the list.
+* Read operations happen on an **immutable snapshot** of the list.
+* No need for synchronization during reads.
+
+### Pros:
+
+✔ Extremely fast reads
+✔ Safe for concurrent readers
+✔ No ConcurrentModificationException
+
+### Cons:
+
+❌ Very expensive writes (copying whole array)
+❌ Not suitable for large write-heavy applications
+
+### Example:
+
+```java
+CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+list.add("A");
+list.add("B");
+
+for (String s : list) {   // Safe, no locks
+    list.add("C");        // No ConcurrentModificationException
+}
+```
+
+---
+
+# 4. How Does ArrayList Grow Dynamically?
+
+Internally ArrayList stores elements in a **dynamic array**.
+
+### Default capacity: 10
+
+When size exceeds capacity:
+
+* New capacity = old capacity * **1.5** (`newCapacity = old + old/2`)
+* A **new array is created**
+* Old elements are copied to new array
+
+### Internal logic (simplified):
+
+```java
+int newCapacity = oldCapacity + (oldCapacity >> 1); // 1.5x
+```
+
+---
+
+# 5. Time Complexity of ArrayList Operations
+
+| Operation           | Time Complexity    | Reason              |
+| ------------------- | ------------------ | ------------------- |
+| `add(E e)` at end   | **O(1)** amortized | Occasional resize   |
+| `add(index, e)`     | **O(n)**           | Shift elements      |
+| `remove(index)`     | **O(n)**           | Shift elements left |
+| `remove(object)`    | **O(n)**           | Search + shift      |
+| `get(index)`        | **O(1)**           | Direct array access |
+| `set(index, value)` | **O(1)**           | Direct array access |
+| `contains()`        | **O(n)**           | Linear search       |
+
+---
+
+# ✔ Quick Interview Summary
+
+| Question                | Short Answer                                                     |
+| ----------------------- | ---------------------------------------------------------------- |
+| ArrayList vs LinkedList | ArrayList faster for access; LinkedList faster for insert/delete |
+| When prefer Vector?     | Legacy thread-safe use case                                      |
+| CopyOnWriteArrayList    | Creates new array on write; great for read-heavy                 |
+| ArrayList growth        | Grows 1.5x on overflow                                           |
+| Time complexity         | add O(1), get O(1), remove O(n)                                  |
+
+---
+
+Here is a **clean, interview-ready explanation with examples** for
+
+# ⭐ Set Implementations in Java — HashSet, LinkedHashSet, TreeSet & NavigableSet
+
+---
+
+# 1. Difference Between **HashSet**, **LinkedHashSet**, and **TreeSet**
+
+| Feature              | **HashSet**    | **LinkedHashSet**            | **TreeSet**                                      |
+| -------------------- | -------------- | ---------------------------- | ------------------------------------------------ |
+| Underlying structure | Hash Table     | Hash Table + Linked List     | Red-Black Tree (Balanced BST)                    |
+| Order maintained?    | ❌ No order     | ✔ Insertion order            | ✔ Sorted order                                   |
+| Sorting              | ❌ Not sorted   | ❌ Not sorted                 | ✔ Yes (ascending by default)                     |
+| Performance          | Fastest (O(1)) | Slightly slower than HashSet | Slowest (O(log n))                               |
+| Null allowed?        | ✔ Yes          | ✔ Yes                        | ✔ Yes (only **one**, but **first element only**) |
+| Allows duplicates?   | ❌ No           | ❌ No                         | ❌ No                                             |
+
+### Example:
+
+```java
+Set<Integer> hash = new HashSet<>();
+Set<Integer> linked = new LinkedHashSet<>();
+Set<Integer> tree = new TreeSet<>();
+```
+
+---
+
+# 2. How Does HashSet Maintain Uniqueness?
+
+HashSet uses:
+
+1. **hashCode()** → to find bucket
+2. **equals()** → to check if two objects are equal
+
+### Process:
+
+* When you add an element, HashSet calculates hashCode().
+* If bucket is empty → store element.
+* If bucket has elements → equals() is used to check duplicates.
+
+### Example:
+
+```java
+HashSet<String> set = new HashSet<>();
+set.add("A");
+set.add("A"); // Duplicate → equals() returns true → ignored
+```
+
+✔ Final set contains only one `"A"`.
+
+---
+
+# 3. Can `null` Be Stored in a Set?
+
+| Set Type          | Null Allowed?                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| **HashSet**       | ✔ Yes (one null)                                                                                     |
+| **LinkedHashSet** | ✔ Yes                                                                                                |
+| **TreeSet**       | ⚠️ **Allowed only if TreeSet contains no comparator and no other objects** (null cannot be compared) |
+
+### Example:
+
+```java
+HashSet<String> set = new HashSet<>();
+set.add(null);  // OK
+```
+
+TreeSet example that fails:
+
+```java
+TreeSet<String> t = new TreeSet<>();
+t.add(null);   // ❌ NullPointerException (cannot compare)
+```
+
+---
+
+# 4. Difference Between TreeSet and HashSet
+
+| Feature     | HashSet     | TreeSet              |
+| ----------- | ----------- | -------------------- |
+| Ordering    | No order    | Sorted               |
+| Performance | O(1)        | O(log n)             |
+| Null        | ✔ Yes       | ❌ Usually No         |
+| Backed by   | Hash table  | Red-Black Tree       |
+| Use Case    | Fast lookup | Maintain sorted data |
+
+---
+
+# 5. What is **NavigableSet**?
+
+`NavigableSet` extends `SortedSet` and supports **navigation methods** to find:
+
+* Lower element
+* Higher element
+* Ceiling
+* Floor
+* Reverse order
+
+The main implementation is **TreeSet**.
+
+### Example:
+
+```java
+NavigableSet<Integer> set = new TreeSet<>();
+set.add(10);
+set.add(20);
+set.add(30);
+
+System.out.println(set.lower(20));   // 10  (just smaller)
+System.out.println(set.higher(20));  // 30  (just larger)
+System.out.println(set.ceiling(25)); // 30  (>=)
+System.out.println(set.floor(25));   // 20  (<=)
+```
+
+---
+
+# ✔ Simple Demonstration of All Three Sets
+
+```java
+Set<Integer> hash = new HashSet<>();
+Set<Integer> linked = new LinkedHashSet<>();
+Set<Integer> tree = new TreeSet<>();
+
+hash.add(3); hash.add(1); hash.add(2);
+linked.add(3); linked.add(1); linked.add(2);
+tree.add(3); tree.add(1); tree.add(2);
+
+System.out.println(hash);    // Order unpredictable
+System.out.println(linked);  // [3, 1, 2]
+System.out.println(tree);    // [1, 2, 3]
+```
+
+---
+
+# ⭐ Final Interview Summary
+
+| Question                        | Short Answer                                      |
+| ------------------------------- | ------------------------------------------------- |
+| HashSet vs LinkedHashSet        | HashSet no order, LinkedHashSet insertion order   |
+| HashSet vs TreeSet              | HashSet faster, TreeSet sorted                    |
+| How HashSet ensures uniqueness? | hashCode + equals                                 |
+| Null in Sets?                   | HashSet & LinkedHashSet allow; TreeSet mostly not |
+| NavigableSet                    | Tree-based set with navigation methods            |
+
+---
+
+Here is a **clean, interview-ready explanation with examples** for
+
+# ⭐ HashMap, LinkedHashMap, TreeMap, Hashtable, WeakHashMap, EnumMap (Java Collections)
+
+---
+
+# **1. Difference Between HashMap, LinkedHashMap, and TreeMap**
+
+| Feature       | **HashMap**    | **LinkedHashMap**        | **TreeMap**                  |
+| ------------- | -------------- | ------------------------ | ---------------------------- |
+| Ordering      | ❌ No order     | ✔ Insertion order        | ✔ Sorted order (keys sorted) |
+| Underlying DS | Hash table     | Hash table + Linked list | Red-Black Tree               |
+| Null keys     | ✔ 1 null key   | ✔ 1 null key             | ❌ No null keys               |
+| Performance   | Fastest (O(1)) | Slightly slower          | Slowest (O(log n))           |
+| Use case      | Fast lookup    | Predictable iteration    | Sorted map                   |
+
+### Example:
+
+```java
+Map<Integer, String> map = new HashMap<>();
+Map<Integer, String> linked = new LinkedHashMap<>();
+Map<Integer, String> tree = new TreeMap<>();
+```
+
+---
+
+# **2. Can HashMap Have Null Key and Null Values?**
+
+Yes ✔
+
+* Only **one null key** allowed
+* Multiple null values allowed
+
+Example:
+
+```java
+HashMap<String, String> map = new HashMap<>();
+map.put(null, "A");
+map.put("B", null);
+```
+
+TreeMap ❌ does **not** allow null key (throws `NullPointerException`).
+
+---
+
+# **3. Internal Working of HashMap (Java 8)**
+
+HashMap in Java 8 uses:
+
+### **Bucket Structure**
+
+* Array of **Node<K,V>**
+* Each bucket can be:
+
+  * Linked List
+  * Red-Black Tree (balanced BST)
+
+### **Process for put(K, V):**
+
+1. Compute **hash = key.hashCode()**
+2. Index = `(n - 1) & hash`
+3. If bucket empty → insert
+4. If key exists → replace value
+5. If bucket size > **TREEIFY_THRESHOLD (8)**
+   → convert linked list into a **red-black tree**
+6. If size > **threshold = capacity * loadFactor** → resize (re-hash)
+
+### **Java 8 Improvement**
+
+✔ Avoids long linked-list chains
+✔ Faster worst-case time: **O(log n)** instead of O(n)
+
+---
+
+# **4. What Is Load Factor and Threshold?**
+
+### **Load Factor**
+
+How full a HashMap can get before resizing.
+
+Default = **0.75**
+
+### **Threshold**
+
+The maximum number of entries before rehash occurs:
+
+```
+threshold = capacity × load factor
+```
+
+Example:
+
+```
+16 × 0.75 = 12
+```
+
+→ When size > 12 → HashMap resizes to 32.
+
+---
+
+# **5. Time Complexity of get() and put()**
+
+| Operation | Average | Worst                                  |
+| --------- | ------- | -------------------------------------- |
+| `put()`   | O(1)    | O(log n) (if tree) or O(n) (very rare) |
+| `get()`   | O(1)    | O(log n)                               |
+
+Worst-case improved in Java 8 due to treeing.
+
+---
+
+# **6. How Are Collisions Handled?**
+
+### **Java 7:**
+
+* Collision handled using **Linked List**
+
+### **Java 8:**
+
+* If bucket size ≤ 8 → Linked list
+* If > 8 → Converted to **Red-Black Tree**
+* If size < 6 again → de-tree to Linked List
+
+This prevents performance degradation from attack collisions.
+
+---
+
+# **7. Difference Between Hashtable and HashMap**
+
+| Feature        | **HashMap**   | **Hashtable**         |
+| -------------- | ------------- | --------------------- |
+| Thread-safe    | ❌ No          | ✔ Yes (synchronized)  |
+| Performance    | Faster        | Slower                |
+| Null key/value | ✔ Allowed     | ❌ Not allowed         |
+| Introduced     | Java 1.2      | Legacy (Java 1.0)     |
+| Iterator       | Fail-fast     | Fail-fast             |
+| Use case       | Single-thread | Multi-thread (legacy) |
+
+**Better alternative:** ConcurrentHashMap, not Hashtable.
+
+---
+
+# **8. Why Is HashMap Not Thread-Safe?**
+
+* Multiple threads modifying the map may cause:
+
+  * Data loss
+  * Infinite loops
+  * Rehashing corruption
+
+HashMap does not synchronize put/get operations → leads to race conditions.
+
+---
+
+# **9. What Is WeakHashMap?**
+
+A map where **keys are stored as WeakReference**.
+
+If a key has **no strong references**, JVM GC removes the entry automatically.
+
+### Example:
+
+```java
+WeakHashMap<Object, String> map = new WeakHashMap<>();
+
+Object key = new Object();
+map.put(key, "Value");
+
+key = null;
+System.gc();
+
+System.out.println(map.size());  // Usually 0
+```
+
+✔ Useful for caches
+✔ Automatically cleans unused keys
+
+---
+
+# **10. When Would You Use EnumMap?**
+
+`EnumMap<K,V>` is a Map optimized for enum keys.
+
+### Features:
+
+* Fastest Map for enum keys
+* Internally stored as an **array**
+* Keys are ordered by enum ordinal
+* Enum keys cannot be null
+
+### Example:
+
+```java
+enum Day { MON, TUE, WED }
+
+EnumMap<Day, String> map = new EnumMap<>(Day.class);
+map.put(Day.MON, "Start");
+map.put(Day.TUE, "Work");
+```
+
+Use when:
+
+* Keys are fixed constants
+* Memory performance matters
+* Fast lookup needed
+
+---
+
+# ⭐ Final Interview Summary
+
+| Question                            | Short Answer                             |
+| ----------------------------------- | ---------------------------------------- |
+| HashMap vs LinkedHashMap vs TreeMap | Unordered vs insertion-ordered vs sorted |
+| Null allowed?                       | HashMap ✔ LinkedHashSet ✔ TreeMap ❌      |
+| HashMap internal working            | Array + linked list + tree               |
+| Load factor                         | Controls resize frequency                |
+| HashMap complexity                  | get/put: O(1) avg                        |
+| Collision handling                  | Linked list or tree                      |
+| Hashtable vs HashMap                | Synchronized vs non-synchronized         |
+| Thread-safety                       | HashMap ❌                                |
+| WeakHashMap                         | Auto-removes weak keys                   |
+| EnumMap                             | Best for enum keys                       |
+
+---
+
