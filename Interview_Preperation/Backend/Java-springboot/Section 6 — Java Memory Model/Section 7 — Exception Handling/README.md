@@ -65,6 +65,11 @@
 3. How do you create custom business exceptions?
 4. How exceptions affect application performance?
 5. Real-world debugging: Handling NullPointerException in production.
+6. Create a custom exception InvalidAgeException.
+7. Write a function that reads a file using try-with-resources.
+8. Explain finally vs return in an example.
+9. Demonstrate catching multiple exceptions in one block.
+10. Convert a checked exception to unchecked (best practices).
 
 ---
 
