@@ -1,0 +1,225 @@
+# ✅ **1. What happens if two elements use the same `id`?**
+
+### ✔ `id` must be **unique** in the entire HTML document.
+
+If two elements share the same id:
+
+---
+
+### **What happens?**
+
+1. **Invalid HTML** (fails W3C validation)
+2. **JavaScript issues**
+
+   * `document.getElementById()` returns **only the first matching element**
+3. **CSS selector conflicts**
+
+   * `#idName` applies to **both elements** (unexpected styling)
+4. **Accessibility issues**
+
+   * Screen readers may target the wrong label
+5. **Browser behavior becomes unpredictable**
+
+---
+
+### ❌ Wrong:
+
+```html
+<div id="box"></div>
+<div id="box"></div> <!-- same id -->
+```
+
+### ✔ Correct:
+
+```html
+<div id="box1"></div>
+<div id="box2"></div>
+```
+
+---
+
+### ✔ Interview summary:
+
+> IDs must be unique; otherwise, JS, CSS, and accessibility break.
+
+---
+
+# ✅ **2. Can a `<div>` be inside a `<span>`? Why or why not?**
+
+Short answer: **NO (invalid HTML).**
+
+---
+
+### Why?
+
+* `<span>` is an **inline element**
+* Inline elements **cannot contain block-level elements** like `<div>`
+
+---
+
+### ❌ Invalid:
+
+```html
+<span>
+  <div>Not allowed</div>
+</span>
+```
+
+### ✔ Valid:
+
+```html
+<div>
+  <span>Allowed</span>
+</div>
+```
+
+---
+
+### Browser behavior:
+
+Most browsers **auto-correct** and move the `<div>` *outside* the `<span>` during DOM creation.
+
+---
+
+### ✔ Interview summary:
+
+> Inline elements like `<span>` cannot wrap block elements like `<div>`, because it breaks the HTML content model.
+
+---
+
+# ✅ **3. Why is `<b>` different from `<strong>`?**
+
+Both make text **bold**, but they have different meanings:
+
+---
+
+## **<b> = purely visual styling**
+
+* No semantic meaning
+* Screen readers treat it as **normal text**
+
+Example:
+
+```html
+<b>Bold Text</b>
+```
+
+---
+
+## **<strong> = semantic importance**
+
+* Conveys **importance / urgency**
+* Screen readers emphasize it (stronger voice)
+
+Example:
+
+```html
+<strong>Error!</strong> Please try again.
+```
+
+---
+
+### ✔ Interview summary:
+
+> `<b>` = stylistic only
+> `<strong>` = semantic emphasis (important for accessibility + SEO)
+
+---
+
+# ✅ **4. Difference between HTML entity `&nbsp;` and space**
+
+## ✔ Regular space:
+
+* Collapses into a single space
+* Multiple spaces turn into one
+* Breakable (browser can wrap text around it)
+
+Example:
+
+```html
+Hello     World
+```
+
+Rendered: **Hello World**
+
+---
+
+## ✔ `&nbsp;` (non-breaking space):
+
+* Does **not collapse**
+* Prevents line break
+* Useful for:
+
+  * Keeping words together
+  * Aligning content
+  * Preventing wrap in UI labels
+
+### Example:
+
+```html
+Hello&nbsp;&nbsp;&nbsp;World
+```
+
+Rendered: **Hello   World**
+
+### Example (non-breaking):
+
+```html
+Price:&nbsp;$100
+```
+
+---
+
+### ✔ Interview summary:
+
+> Space collapses and is breakable;
+> `&nbsp;` does not collapse and prevents line wrapping.
+
+---
+
+# ✅ **5. Are HTML tags case-sensitive? Why?**
+
+### **NO — HTML tags are NOT case-sensitive.**
+
+Meaning:
+
+```html
+<DIV> = <div> = <Div> = <dIv>
+```
+
+---
+
+### Why?
+
+* HTML is based on **SGML** (not case-sensitive)
+* Browsers convert tags to **lowercase internally**
+* HTML5 specification defines tags in lowercase
+
+---
+
+### Example:
+
+```html
+<DIV>Content</DIV>
+```
+
+Browser treats it exactly the same as:
+
+```html
+<div>Content</div>
+```
+
+---
+
+### Exception:
+
+➡ **XHTML is case-sensitive**, because it is XML-based.
+
+---
+
+
+> HTML tags are not case-sensitive because HTML is not XML. However, lowercase is recommended for consistency and readability.
+
+---
+
+
