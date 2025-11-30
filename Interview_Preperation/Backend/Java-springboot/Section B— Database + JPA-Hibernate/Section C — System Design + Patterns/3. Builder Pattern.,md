@@ -1,0 +1,349 @@
+# ✅ **1. What is the Builder Pattern?**
+
+The **Builder Pattern** is a creational design pattern used to build **complex objects step-by-step**, especially when:
+
+* An object has **many fields**,
+* Many of them are **optional**,
+* Or the constructor would have too many arguments.
+
+Builder provides a **readable**, **configurable**, and **flexible** object creation mechanism.
+
+### Example:
+
+```java
+User user = new User.Builder()
+                .id(1)
+                .name("John")
+                .email("john@gmail.com")
+                .build();
+```
+
+---
+
+# ✅ **2. Difference between Builder and Constructor pattern**
+
+| Feature                 | Constructor                   | Builder           |
+| ----------------------- | ----------------------------- | ----------------- |
+| Arguments               | Many arguments → hard to read | Fluent & readable |
+| Optional fields         | Hard to manage                | Easy              |
+| Immutability            | Difficult                     | Very easy         |
+| Overloaded constructors | Many constructors needed      | No need           |
+| Maintainability         | Low                           | High              |
+
+### Constructor Example (hard to read):
+
+```java
+User u = new User(1, "John", "IT", null, null, null);
+```
+
+### Builder Example:
+
+```java
+User u = User.builder().id(1).name("John").department("IT").build();
+```
+
+---
+
+# ✅ **3. When should you use Builder instead of setter?**
+
+Use **Builder** when:
+
+✔ You want immutability
+✔ Object has many optional parameters
+✔ Want readable configuration
+✔ Want to avoid partially initialized objects
+✔ Want thread-safety (immutable object)
+✔ You want to eliminate telescoping constructors
+
+Avoid using setters because they:
+
+❌ Break immutability
+❌ Allow inconsistent objects
+❌ Make objects stateful and error-prone
+
+---
+
+# ✅ **4. How does Builder help with immutability?**
+
+Builder builds the object → then returns an **immutable instance**:
+
+```java
+public final class User {
+    private final int id;
+    private final String name;
+    private final String email;
+
+    private User(Builder b) {
+        this.id = b.id;
+        this.name = b.name;
+        this.email = b.email;
+    }
+}
+```
+
+After creation:
+
+* No setters
+* Fields cannot be changed
+* Thread-safe
+* Consistent state guaranteed
+
+---
+
+# ✅ **5. What problem does Builder solve with complex objects?**
+
+Builder solves:
+
+### ✔ The **Telescoping Constructor Problem**
+
+Too many constructor parameters:
+
+```java
+new Order(id, name, quantity, price, discount, tax, shipping, coupon ...)
+```
+
+Hard to remember the order.
+
+---
+
+### ✔ The **Optional Parameter Problem**
+
+Some fields are optional → hard with constructors.
+
+---
+
+### ✔ The **Validation Problem**
+
+Builder can validate input *before* calling build().
+
+---
+
+### ✔ The **Readability Problem**
+
+Builder makes object creation readable & self-explanatory.
+
+---
+
+# ✅ **6. How is Lombok’s @Builder different from manual Builder?**
+
+**Lombok @Builder**:
+
+✔ Auto generates builder class
+✔ No boilerplate
+✔ Easy to use
+✔ Supports @SuperBuilder for inheritance
+
+Example:
+
+```java
+@Builder
+public class User {
+    private int id;
+    private String name;
+    private String email;
+}
+```
+
+Use:
+
+```java
+User u = User.builder().id(1).name("John").build();
+```
+
+---
+
+**Manual Builder**:
+
+✔ Full control over validation
+✔ Can implement step builder
+✔ No dependency
+✔ Better debugging
+
+Lombok hides code → good but limited in custom behavior.
+
+---
+
+# ✅ **7. Builder vs Factory Pattern**
+
+| Feature              | Builder                | Factory                          |
+| -------------------- | ---------------------- | -------------------------------- |
+| Purpose              | Build complex object   | Create object based on condition |
+| With many fields     | Best                   | Bad                              |
+| With object families | Not good               | Best                             |
+| Immutability         | Supports               | Not related                      |
+| Object variations    | Different combinations | Different product types          |
+
+### Example:
+
+* **Factory**: chooses *which type* of object to create
+* **Builder**: configures *how to create* that object
+
+---
+
+# 🟢 Interview answer:
+
+> “Factory selects the object; Builder configures the object.”
+
+---
+
+# ✅ **8. Example of Builder used in real project**
+
+### Real scenario: Creating a REST DTO with optional fields
+
+We created a Builder for `UserProfileResponse`:
+
+```java
+public class UserProfileResponse {
+    private final String name;
+    private final String email;
+    private final String address;
+    private final String phone;
+
+    public static class Builder {
+        private String name;
+        private String email;
+        private String address;
+        private String phone;
+
+        public Builder name(String n) { this.name = n; return this; }
+        public Builder email(String e) { this.email = e; return this; }
+        public Builder address(String a) { this.address = a; return this; }
+        public Builder phone(String p) { this.phone = p; return this; }
+
+        public UserProfileResponse build() {
+            return new UserProfileResponse(this);
+        }
+    }
+}
+```
+
+Usage:
+
+```java
+UserProfileResponse resp = new UserProfileResponse.Builder()
+                                .name("John")
+                                .email("john@gmail.com")
+                                .build();
+```
+
+This allowed flexible and immutable responses in our REST API.
+
+---
+
+# 🔥 Other common real-world uses:
+
+* Building **HTTP requests** (OkHttp, Retrofit)
+* Creating **Hibernate/Spring configurations**
+* Constructing **DTOs from entities**
+* Kafka producer settings
+* Cloud infrastructure configurations
+
+---
+
+# ✅ **9. What is Step Builder Pattern?**
+
+Step Builder enforces **mandatory steps** before object creation.
+
+Example:
+
+```java
+User user = UserBuilder.step1()
+                       .withId(1)
+                       .withName("John")
+                       .optionalEmail("abc@gmail.com")
+                       .build();
+```
+
+Example structure:
+
+```java
+interface IdStep { NameStep id(int id); }
+interface NameStep { OptionalStep name(String name); }
+interface OptionalStep {
+    OptionalStep email(String email);
+    User build();
+}
+```
+
+Ensures:
+
+* **id** and **name** cannot be skipped
+* Others are optional
+
+Useful for:
+
+* Complex business rules
+* Mandatory fields
+
+---
+
+# ✅ **10. UML for Builder Pattern**
+
+```
+              +-----------------------+
+              |       Director        |
+              +-----------------------+
+                        |
+                        v
+              +-----------------------+
+              |       Builder         |<----------------------+
+              +-----------------------+                       |
+              | buildPartA()         |                       |
+              | buildPartB()         |                       |
+              | build()              |                       |
+              +-----------------------+                       |
+                        ^                                      |
+                        |                                      |
+         --------------------------------------               |
+         |                                    |               |
++-----------------------+         +-----------------------+   |
+|   ConcreteBuilder1    |         |   ConcreteBuilder2    |   |
++-----------------------+         +-----------------------+   |
+| buildPartA()          |         | buildPartA()          |   |
+| buildPartB()          |         | buildPartB()          |   |
+| build()               |         | build()               |   |
++-----------------------+         +-----------------------+   |
+                        ^                                      |
+                        |                                      |
+               +-----------------------+                        |
+               |        Product        |------------------------+
+               +-----------------------+
+```
+
+Simplified modern UML (without Director):
+
+```
+            +---------------+
+            |    Builder    |
+            +---------------+
+            | field1(...)   |
+            | field2(...)   |
+            | build()       |
+            +-------+-------+
+                    |
+                    v
+            +---------------+
+            |    Product    |
+            +---------------+
+```
+
+---
+
+# 🎯 **Final Summary (Cheatsheet)**
+
+| Topic                  | Short Answer                              |
+| ---------------------- | ----------------------------------------- |
+| What is Builder?       | Build complex objects step-by-step        |
+| Builder vs Constructor | Builder more readable & flexible          |
+| Builder vs Setter      | Builder supports immutability             |
+| Helps immutability     | Only final fields, no setters             |
+| Problem solved         | Telescoping constructors, optional params |
+| Lombok @Builder        | Auto-generated builder                    |
+| Builder vs Factory     | Factory decides type, Builder constructs  |
+| Real project use       | DTO creation, configs, REST responses     |
+| Step Builder           | Enforce mandatory parameters              |
+| UML                    | Builder → Product                         |
+
+---
+
+
