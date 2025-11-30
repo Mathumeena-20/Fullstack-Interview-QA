@@ -1,4 +1,0 @@
-REACTJS
-CSS
-JavaScript
-HTML
