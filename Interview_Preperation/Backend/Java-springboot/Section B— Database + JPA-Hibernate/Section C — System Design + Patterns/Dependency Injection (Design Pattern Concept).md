@@ -1,0 +1,345 @@
+
+# ✅ **1. What is Dependency Injection (DI)?**
+
+**Dependency Injection** is a design technique where **an object receives the objects (dependencies) it needs from an external source**, instead of creating them by itself.
+
+### ❌ Without DI (manual dependency creation)
+
+```java
+class Car {
+    Engine engine = new Engine();  // Car creates its dependency
+}
+```
+
+Car is tightly coupled to Engine.
+
+### ✅ With DI
+
+```java
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {  // Engine is injected
+        this.engine = engine;
+    }
+}
+```
+
+Car no longer controls *how* Engine is created.
+It just *uses* it.
+
+---
+
+# ✅ **2. Why is DI important in design patterns?**
+
+DI reduces coupling and increases:
+
+* **Flexibility** (easy to swap implementations)
+* **Testability** (mock dependencies)
+* **Reusability** (components do not know how others are created)
+* **Maintainability** (clean, modular code)
+
+Most design patterns (Strategy, Factory, Builder, Proxy, Decorator) internally rely on DI.
+
+---
+
+# ✅ **3. Difference Between Constructor Injection and Setter Injection**
+
+### ✔ **Constructor Injection**
+
+Dependencies are passed via **constructor**.
+
+```java
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+```
+
+**Pros:**
+
+* Makes object *immutable*
+* Ensures dependency is available at creation
+* Helps in mandatory dependencies
+
+**Cons:**
+
+* Too many constructor parameters → “telescoping”
+
+---
+
+### ✔ **Setter Injection**
+
+Dependencies are passed via **setters**.
+
+```java
+class Car {
+    private Engine engine;
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+}
+```
+
+**Pros:**
+
+* Optional dependencies supported
+* More readable with many parameters
+
+**Cons:**
+
+* Object can be used before dependency is set
+* Allows property modification (not immutable)
+
+---
+
+# ✅ **4. How does DI improve testability?**
+
+DI allows you to **inject a mock object** instead of real dependent object.
+
+### Example:
+
+```java
+class MockEngine implements Engine { }
+
+Car car = new Car(new MockEngine());
+```
+
+You can now test Car **without starting a real Engine**, making unit tests:
+
+* Faster
+* Isolated
+* More controllable
+
+---
+
+# ✅ **5. What is Inversion of Control (IoC)?**
+
+**IoC means objects do not control the creation of dependencies.
+Control is inverted to a container/framework.**
+
+Instead of:
+
+➡ Your class creates objects
+You let
+⬅ A framework (Spring) create and manage them
+
+DI is the **technique** to implement IoC.
+
+---
+
+# ✅ **6. Difference between tightly coupled and loosely coupled code**
+
+### ❌ **Tightly Coupled**
+
+Class depends on a specific implementation.
+
+```java
+class Car {
+    DieselEngine engine = new DieselEngine();
+}
+```
+
+Problems:
+
+* Can’t replace DieselEngine with ElectricEngine
+* Hard to test
+* Hard to extend
+
+---
+
+### ✔ **Loosely Coupled (Using DI)**
+
+```java
+class Car {
+    Engine engine; // Interface
+    Car(Engine engine) { this.engine = engine; }
+}
+```
+
+Benefits:
+
+* Implementation can change anytime
+* More reusable and flexible
+* Works well with patterns like Strategy
+
+---
+
+# ✅ **7. How does Spring implement DI internally?**
+
+Spring uses:
+
+### **1. BeanFactory / ApplicationContext**
+
+* Creates and manages objects (beans)
+* Stores beans in a container
+
+### **2. Reflection**
+
+Spring uses Java Reflection to:
+
+* Instantiate classes (`newInstance()`)
+* Call setters
+* Call constructors
+
+### **3. BeanPostProcessors**
+
+Used for:
+
+* @Autowired
+* @PostConstruct
+* AOP proxies
+
+### **4. Component Scanning**
+
+* Detects annotations like `@Component`, `@Service`, etc.
+
+### Sample Spring DI
+
+```java
+@Component
+class Engine { }
+
+@Component
+class Car {
+    @Autowired
+    Engine engine;
+}
+```
+
+Spring decides:
+
+* When to create Engine
+* When to inject it into Car
+
+This is IoC + DI in action.
+
+---
+
+# ✅ **8. How does DI relate to Singleton and Factory patterns?**
+
+### ✔ DI & Singleton
+
+Spring DI container **creates singletons automatically**
+→ `@Bean` or `@Component` defaults to **Singleton scope**
+
+```java
+@Component // Singleton by default
+class Engine {}
+```
+
+Spring ensures **one instance** is shared everywhere.
+
+---
+
+### ✔ DI & Factory
+
+DI container acts like a **super factory**.
+
+* You ask Spring for a bean
+* It gives you an instance
+* This replaces manual factory patterns in many cases
+
+---
+
+# ✅ **9. Disadvantages of DI**
+
+| Disadvantage        | Explanation                                     |
+| ------------------- | ----------------------------------------------- |
+| Hidden dependencies | Harder to trace object creation                 |
+| Over-engineering    | Too much DI for simple programs                 |
+| Runtime errors      | Missing beans cause runtime exceptions          |
+| Harder debugging    | Framework magic hides logic                     |
+| Learning curve      | Understanding IoC, proxies, container lifecycle |
+
+---
+
+# ✅ **10. Real-world DI Use Cases**
+
+### ✔ 1. Payment System
+
+Switch between multiple payment methods:
+
+* UPI
+* Card
+* Wallet
+
+Using Strategy + DI.
+
+### ✔ 2. Notification Service
+
+Inject different communication channels:
+
+* Email
+* SMS
+* WhatsApp
+
+### ✔ 3. Logging Frameworks
+
+Inject loggers:
+
+* Log4j
+* SLF4J
+* Custom logger
+
+### ✔ 4. Database Layer
+
+Inject different database implementations:
+
+* MySQL
+* Postgres
+* MongoDB
+
+### ✔ 5. Microservices
+
+Inject:
+
+* RestTemplate / WebClient
+* Feign Clients
+* Message queues (Kafka, RabbitMQ)
+
+---
+
+# ⭐ Final Combined Example (Interview-Favorite)
+
+```java
+interface PaymentStrategy {
+    void pay(int amount);
+}
+
+class UpiPayment implements PaymentStrategy {
+    public void pay(int amount) { System.out.println("Paid via UPI"); }
+}
+
+class CardPayment implements PaymentStrategy {
+    public void pay(int amount) { System.out.println("Paid via Card"); }
+}
+
+class ShoppingCart {
+    private PaymentStrategy strategy;
+
+    // Constructor Injection
+    public ShoppingCart(PaymentStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void checkout(int amount) {
+        strategy.pay(amount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart(new UpiPayment());
+        cart.checkout(1000);
+    }
+}
+```
+
+You can replace `UpiPayment` with `CardPayment` easily → **Loose Coupling**.
+
+---
