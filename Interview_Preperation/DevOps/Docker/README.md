@@ -1,4 +1,4 @@
-Beginner (Basics)
+**Beginner (Basics)**
 1. What is Docker?
 
 A platform to build, ship, and run applications inside lightweight containers.
@@ -21,7 +21,7 @@ Less resource usage	High resource usage
 
 A text file with instructions to build a Docker image.
 
-Intermediate
+**Intermediate**
 6. What does the COPY vs ADD instruction do?
 
 COPY → copies local files
@@ -52,7 +52,7 @@ docker exec
 
 Public registry for storing/pulling images.
 
-Advanced
+**Advanced**
 11. What is multi-stage Docker build?
 
 Technique to optimize image size by using multiple FROM stages.
@@ -115,7 +115,7 @@ Sign images
 
 Use trusted base images
 
-Scenario-Based
+**Scenario-Based**
 21. A container keeps restarting—how do you troubleshoot?
 
 Check logs → docker logs
